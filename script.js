@@ -68,6 +68,26 @@ function clearItems(){
     checkUI()
 }
 
+
+//filter to search for letter matches
+function filterItems(e){
+    const items = itemList.querySelectorAll('li');
+    const text = e.target.value.toLowerCase();
+    //loop through the text value and compare to the text added
+    items.forEach(item => {
+        const itemName = item.firstChild.textContent.toLowerCase();
+
+        if(itemName.indexOf(text) != -1){
+            item.style.display = 'flex'
+        }else{
+            item.style.display = 'none'
+        }
+        
+    })
+}
+
+
+
 function checkUI(){
     const items = itemList.querySelectorAll('li');
     if(items.length === 0){
@@ -85,6 +105,8 @@ function checkUI(){
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
+itemFilter.addEventListener('input', filterItems);
+
 
 //Check for items when the window refresh
 checkUI();
